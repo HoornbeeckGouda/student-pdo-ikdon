@@ -8,10 +8,10 @@ define('PASSWORD','7q06DXjDr1Z3reXK');
 //gebruik geen root!!!
 //STAP 2 | connection db
 try {
-    $dbconn=mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-    mysqli_set_charset($dbconn, 'utf8');
+    $dbconn = new PDO("mysql:host=" . HOST . ";dbname=" . DATABASE . ";charset=utf8mb4", USER, PASSWORD);
+    $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
-catch (mysqli_sql_exception $e) {
+catch (PDOException $e) {
     echo $e->getMessage();
     exit;
 }
