@@ -1,5 +1,6 @@
 <?php
 include 'inc/header.php';
+include 'classes/Student.php';
 ?>
 <?php
 // initialiseren/declareren
@@ -17,22 +18,10 @@ $table_header = '<table id="students">
                         <th>email</th>
                         <th>klas</th>
                         <th>geboortedatum</th>
+                        <th>actie</th>
                     </tr>';
-$qry_student = "SELECT 
-                        id, 
-                        voornaam, 
-                        tussenvoegsel, 
-                        achternaam,
-                        straat,
-                        postcode,
-                        woonplaats,
-                        email,
-                        klas,
-                        geboortedatum
-                        FROM student
-                        ORDER BY achternaam, voornaam;";
-// gegevens query ophalen uit db student
-$result = $dbconn->prepare($qry_student);
+$student = new Student($dbconn);
+$result = $student->getStudent();
 try {
     $result->execute();
     $result->setFetchMode(PDO::FETCH_ASSOC);
@@ -40,7 +29,8 @@ try {
     echo "Error:". $e->getMessage();
     exit;
 }
-$count_records = $result->rowCount();
+
+$count_records = $student->getStudentCount();
 if ($count_records>0) { // wel studenten ophalen
     foreach($result as $row) {
         $contentTable .= "<tr>
@@ -54,6 +44,7 @@ if ($count_records>0) { // wel studenten ophalen
                             <td>" . $row['email'] . "</td>
                             <td>" . $row['klas'] . "</td>
                             <td>" . $row['geboortedatum'] . "</td>
+                            <td>" . "<a href='edit.php?id=" . $row['id'] . "'>Edit</a></td>
                         </tr>";
     }
 }
