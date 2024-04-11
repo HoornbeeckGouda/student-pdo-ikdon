@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'inc/header.php';
 ?>
 <?php
 // initialiseren/declareren
@@ -62,6 +62,6 @@ $table_student = $table_header . $contentTable . "</table>";
 echo $table_student;
 ?>
 <?php
-include 'footer.php';
+include 'inc/footer.php';
 ?>
 
