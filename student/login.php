@@ -11,6 +11,7 @@ if (isset($_SESSION['ingelogd']) && $_SESSION['ingelogd'] === true) {
         <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" required>
         <input type="submit" name="submit" value="Inloggen">
     </form>
+    <a href="forgot-password.php">Wachtwoord vergeten?</a>
 <?php
 include 'inc/footer.php';
 ?>
